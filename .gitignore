@@ -1,0 +1,15 @@
+# Ignore config file
+config.py 
+
+# Ignore directories/logs
+drafts/PQ/data
+drafts/PQ/catboost_info
+drafts/PQ/logs.log
+drafts/PQ/notebooks/logs.log
+drafts/PQ/src/__pycache__
+drafts/PQ/venv
+notebooks/data
+logs.log
+notebooks/logs.log
+src/__pycache__
+__pycache__

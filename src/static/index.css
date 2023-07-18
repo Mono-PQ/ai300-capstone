@@ -1,0 +1,36 @@
+#churnForm, #doc{
+    width: 70%;
+    background-color: #F8F6F4;
+    padding-bottom: 60px;
+}
+
+#navbar{
+    background-color: #D2E9E9;
+}
+
+.btn-primary{
+    background-color: #C4DFDF;
+    border-color: #C4DFDF;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:active:focus  {
+    background-color: #E3F4F4;
+    border-color: #E3F4F4; 
+    color: #9BA4B5;
+}
+
+.btn-close {
+    width: 1.5em;
+    height: 1.5em
+}
+
+.accordion-button:not(.collapsed) {
+    color: #000000;
+    background-color: #D2E9E9;
+}
+
+body{
+    background-color: #E3F4F4;
+    padding-top: 56px;
+    
+}

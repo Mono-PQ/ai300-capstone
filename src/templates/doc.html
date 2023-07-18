@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="../static/index.css" rel="stylesheet">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Predict Telco Customer Churn</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <a class="navbar-brand ps-3" href="{{ url_for('home') }}">AI300 Capstone Project 👩🏻‍💻</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link ps-3" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ps-3" href="{{ url_for('doc') }}">Documentation</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div class="container p-10 my-10 border" id="doc">
+        <p class="h1 text-center pt-5 pb-5">Documentation</p> 
+
+        <p class="h3 text-left pb-2">Table of Contents</p>
+          <ol>
+            <li><a href="{{ url_for('doc')}}#inputfeatures">Input Features</a></li>
+            <li><a href="{{ url_for('doc') }}#apicall">API Guide</a></li>
+          </ol>
+
+        <p class="h3 text-left pt-5 pb-2" id="inputfeatures">25 input features:</p>
+        <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" style="width:20%">Input feature</th>
+            <th scope="col">Brief description</th>
+            <th scope="col">Type of variable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tenure</td>
+            <td>Number of months the customer <br> 
+              has stayed with the company</td>
+            <td>Integer</td>
+          </tr>
+          <tr>
+            <td>No. of referrals</td>
+            <td>Number of referrals made by <br>
+              the customer</td>
+            <td>Integer</td>
+          </tr>
+          <tr>
+              <td>Internet Service</td>
+              <td>Whether the customer subscribed <br>
+                  for internet service or not </td>
+              <td>String ("Yes" or "No")</td>
+            </tr>
+          <tr>
+              <td>Internet Type</td>
+              <td>The type of internet service the<br>
+                  customer subscribed for</td>
+              <td>String ("Cable", "DSL", 
+                  "Fiber optic", or "None")</td>
+          </tr>
+          <tr>
+              <td> Unlimited Data </td>
+              <td>Whether the customer has <br>
+                  unlimited data or not</td>
+              <td>String ("Yes" or "No")</td>
+          <tr>
+              <td> Phone Service </td>
+              <td>Whether the customer has phone <br>
+                  service or not </td>
+              <td>String ("Yes" or "No")</td>
+          <tr>
+              <td> Multiple Lines  </td>
+              <td> Whether the customer has <br>
+              multiple phone lines or not </td>
+              <td>String ("Yes" or "No")</td>
+          <tr>
+              <td> Premium Tech Support </td>
+              <td> Whether the customer has <br>
+              premium tech support or not </td>
+              <td>String ("Yes" or "No")</td>
+          </tr>
+          <tr>
+              <td> Online Security </td>
+              <td> Whether the customer has <br>
+              online security or not </td>
+              <td>String ("Yes" or "No")</td>
+          </tr>
+          <tr>
+              <td> Online Backup </td>
+              <td> Whether the customer has <br>
+              online backup or not</td>
+              <td>String ("Yes" or "No")</td>
+          </tr>
+          <tr>
+              <td> Device Protection </td>
+              <td> Whether the customer has <br>
+              device protection or not</td>
+              <td>String ("Yes" or "No")</td>
+          </tr>
+          <tr>
+              <td> Contract Type </td>
+              <td> Contract term of the customer </td>
+              <td> String ("Month-to-month", "One
+              year", or "Two year")</td>
+          </tr>
+          <tr>
+              <td> Paperless Billing </td>
+              <td> Whether the customer has 
+              paperless billing or not </td>
+              <td> String ("Yes" or "No")</td>
+          </tr>
+          <tr>
+              <td> Payment Method </td>
+              <td> Payment method of the customer </td>
+              <td> String ("Mailed Check", "Bank <br>
+              Withdrawal", or "Credit Card")</td>
+          <tr>
+              <td> Stream TV </td>
+              <td> Whether the customer streams TV or not </td>
+              <td> String ("Yes" or "No")</td>
+          </tr>
+          <tr>
+              <td> Stream Movie </td>
+              <td> Whether the customer streams Movie or not </td>
+              <td> String ("Yes" or "No")</td>
+          </tr>
+          <tr>
+              <td> Stream Music </td>
+              <td> Whether the customer streams Music or not </td>
+              <td> String ("Yes" or "No")</td>
+          </tr>
+          <tr>
+              <td> Total Long Distance Fee </td>
+              <td> Total long distance data fee incurred by <br>
+                  customer in the last quarter </td>
+              <td> Float</td>
+          </tr>
+          <tr>
+              <td> Total Monthly Fee </td>
+              <td> Total monthly fee charged <br>
+              to the customer </td>
+              <td> Float</td>
+          </tr>
+          <tr>
+              <td> Gender </td>
+              <td> Gender of the customer </td>
+              <td> String ("Male" or "Female") </td>
+          </tr>
+          <tr>
+              <td> Senior Citizen </td>
+              <td> Whether the customer is a <br> 
+              senior citizen or not </td>
+              <td> String ("Yes" or "No") </td>
+          </tr>
+          <tr>
+              <td> Married </td>
+              <td> Whether the customer is <br> 
+              is married or not </td>
+              <td> String ("Yes" or "No") </td>
+          </tr>
+          <tr>
+              <td> Number of dependents </td>
+              <td> Number of dependents <br> 
+              the customer has  </td>
+              <td> Integer </td>
+          </tr>
+          <tr>
+              <td> Zipcode </td>
+              <td> 5-digit zip code of the <br> 
+              customer's area  </td>
+              <td> String </td>
+          </tr>
+          <tr>
+              <td> City </td>
+              <td> Name of the city </td>
+              <td> String </td>
+          </tr>
+        </tbody>
+        </table>
+
+        <p class="h3 text-left pt-5 pb-2" id="apicall">API Guide</p>
+        <p class="text-left">API address resource: <code>/api/predict</code></p>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                API Parameters - Not Churn (Json format)
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <pre><code>
+                  {
+                    "tenure": "30",
+                    "referrals": "3",
+                    "internet": "No",
+                    "internet-type": "Cable", 
+                    "unlimited-data": "No",
+                    "phone-service": "No",
+                    "multiple-lines": "No", 
+                    "premium-support": "No",
+                    "online-security": "No", 
+                    "online-backup": "No",
+                    "device-protection": "No", 
+                    "contract-type": "Month-to-Month",
+                    "paperless-billing": "No",
+                    "payment-method": "Bank Withdrawal",
+                    "long-distance-fee": "800.00",
+                    "stream-tv": "No", 
+                    "stream-movie": "No",
+                    "stream-music": "No",
+                    "monthly-fee": "100.20",
+                    "gender": "Male",
+                    "senior": "No",
+                    "married": "No",
+                    "dependents": "2",
+                    "zipcode": "92620",
+                    "city": "Napa"
+                  }
+                </code></pre>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                API Parameters - Churn (Json format)
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <pre><code>
+                  {
+                    "tenure": "3",
+                    "referrals": "3",
+                    "internet": "Yes",
+                    "internet-type": "Fiber Optic", 
+                    "unlimited-data": "Yes",
+                    "phone-service": "Yes",
+                    "multiple-lines": "No", 
+                    "premium-support": "Yes",
+                    "online-security": "No", 
+                    "online-backup": "No",
+                    "device-protection": "No", 
+                    "contract-type": "Month-to-Month",
+                    "paperless-billing": "Yes",
+                    "payment-method": "Credit Card",
+                    "long-distance-fee": "22.14",
+                    "stream-tv": "Yes", 
+                    "stream-movie": "No",
+                    "stream-music": "No",
+                    "monthly-fee": "80.90",
+                    "gender": "Female",
+                    "senior": "Yes",
+                    "married": "No",
+                    "dependents": "0",
+                    "zipcode": "93010",
+                    "city": "Camarillo"
+                  } 
+                </code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

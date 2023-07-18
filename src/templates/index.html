@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="../static/index.css" rel="stylesheet">
+    <title>Predict Telco Customer Churn</title>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <a class="navbar-brand ps-3" href="{{ url_for('home') }}">AI300 Capstone Project 👩🏻‍💻</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link ps-3" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ps-3" href="{{ url_for('doc') }}">Documentation</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+    <div class="container p-10 my-10 border" id="churnForm">
+        <p class="h1 text-center pt-5 pb-3">Telco Customer Churn Prediction</p>
+        <!--         (Use Jinja templating with if condition)    -->
+        {% if prediction %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">Prediction Results:</h4>
+            <p>{{ prediction }}</p>
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+        {% endif %}
+
+        <p class="h6 text-left pt-2 pb-3">Fill in the form below:</p>
+        <form method="POST">
+            <label class="form-label" for="tenure">Tenure:</label><br>
+            <input class="form-control" type="text" id="tenure" name="tenure" value="10"><br><br>
+
+            <label class="form-label" for="tenure">No. of referrals:</label><br>
+            <input class="form-control" type="text" id="referrals" name="referrals" value="3"><br><br>
+
+            <label class="form-label" for="internet">Internet Service:</label><br>
+                <select class="form-select" name="internet" id="internet">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>
+
+            <label class="form-label" for="internet-type">Internet Type:</label><br>
+                <select class="form-select" name="internet-type" id="internet-type">
+                <option value="0" selected>None</option>
+                <option value="1" selected>Fiber Optic</option>
+                <option value="2" selected>DSL</option>
+                <option value="3" selected>Cable</option>
+            </select><br><br>
+
+            <label class="form-label" for="unlimited-data">Unlimited Data:</label><br>
+                <select class="form-select" name="unlimited-data" id="unlimited-data">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>
+
+            <label class="form-label" for="phone-service">Phone Service:</label><br>
+                <select class="form-select" name="phone-service" id="phone-service">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>
+
+            <label class="form-label" for="multiple-lines">Multiple Lines:</label><br>
+                <select class="form-select" name="multiple-lines" id="multiple-lines">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>            
+
+            <label class="form-label" for="premium-support">Premium Tech Support:</label><br>
+                <select class="form-select" name="premium-support" id="premium-support">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>                
+
+            <label class="form-label" for="online-security">Online Security:</label><br>
+                <select class="form-select" name="online-security" id="online-security">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>              
+
+            <label class="form-label" for="online-backup">Online Backup:</label><br>
+                <select class="form-select" name="online-backup" id="online-backup">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>
+            
+            <label class="form-label" for="device-protection">Device Protection:</label><br>
+                <select class="form-select" name="device-protection" id="device-protection">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>  
+            
+            <label class="form-label" for="contract-type">Contract Type:</label><br>
+                <select class="form-select" name="contract-type" id="contract-type">
+                <option value="0" selected>Month-to-Month</option>
+                <option value="1">One Year</option>
+                <option value="2">Two Years</option>
+            </select><br><br>
+            
+            <label class="form-label" for="paperless-billing">Paperless Billing:</label><br>
+                <select class="form-select" name="paperless-billing" id="paperless-billing">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>             
+
+            <label class="form-label" for="payment-method">Payment Method:</label><br>
+                <select class="form-select" name="payment-method" id="payment-method">
+                <option value="0" selected>Bank Withdrawal</option>
+                <option value="1">Credit Card</option>
+                <option value="2">Mailed Check</option>
+            </select><br><br>   
+
+            <label class="form-label" for="stream-tv">Stream TV:</label><br>
+                <select class="form-select" name="stream-tv" id="stream-tv">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>    
+
+            <label class="form-label" for="stream-movie">Stream Movie</label><br>
+                <select class="form-select" name="stream-movie" id="stream-movie">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>    
+
+            <label class="form-label" for="stream-music">Stream Music:</label><br>
+                <select class="form-select" name="stream-music" id="stream-music">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>    
+
+            <label class="form-label" for="long-distance-fee">Total Long Distance Fee:</label><br>
+            <input class="form-control" type="text" id="long-distance-fee" name="long-distance-fee" value="40.00"><br><br> 
+
+            <label class="form-label" for="monthly-fee">Total Monthly Fee:</label><br>
+            <input class="form-control" type="text" id="monthly-fee" name="monthly-fee" value="100.00"><br><br> 
+
+            <label class="form-label" for="gender">Gender:</label><br>
+            <select class="form-select" name="gender" id="gender">
+                <option value="0" selected>Male</option>
+                <option value="1">Female</option>
+            </select><br><br>
+
+            <label class="form-label" for="senior">Senior Citizen:</label><br>
+            <select class="form-select" name="senior" id="senior">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>    
+            
+            <label class="form-label" for="married">Married:</label><br>
+            <select class="form-select" name="married" id="married">
+                <option value="0" selected>No</option>
+                <option value="1">Yes</option>
+            </select><br><br>   
+
+            <label class="form-label" for="dependents">No. of Dependents:</label><br>
+            <input class="form-control" type="text" id="dependents" name="dependents" value="2"><br><br> 
+
+            <label class="form-label" for="zipcodes">Zipcode:</label><br>
+            <select class="form-select" name="zipcodes" id="zipcodes" method="GET" action="/">
+                <option value="{{ zipcodes[0] }}" selected>{{ zipcodes[0] }}</option>
+                {% for zipcode in zipcodes[1:] %}
+                    <option value="{{zipcode}}">{{ zipcode }}</option> 
+                {% endfor %}
+            </select><br><br>
+
+            <label class="form-label" for="cities">City:</label><br>
+            <select class="form-select" name="cities" id="cities" method="GET" action="/">
+                <option value="{{ cities[0] }}" selected>{{ cities[0] }}</option>
+                {% for city in cities[1:] %}
+                    <option value="{{ city }}">{{ city }}</option> 
+                {% endfor %}
+            </select><br><br>
+            
+            <input class="btn btn-primary btn-lg" type="submit" value="Predict">
+        </form>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
