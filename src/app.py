@@ -9,7 +9,7 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load dataset for form list generation and validation
-df = pd.read_csv('src/static/customer_churn_v0.csv')
+df = pd.read_csv('static/customer_churn_v0.csv')
 
 
 # Method 1: Via HTML Form
