@@ -7,8 +7,12 @@
   - [Chosen Model and Features](#chosen-model-and-features)
   - [Offline AUC metrics of above model](#offline-auc-metrics-of-above-model)
 
-## Website of Deployed Web Application 
-- [Deployed Capstone Website @ https://ai300-capstone-project.onrender.com/](https://ai300-capstone-project.onrender.com/)
+## Website of Deployed Web Application
+- Deployed machine learning model via a flask web application to predict whether customer would churn. 
+- Database connection was established to AWS RDMS to extract relevant data via SQL query. Data exploration was conduction before modeling. Codes can be found in the `notebooks` folder. 
+- Flask web application was created to wrap the ML model for deployment enabling users to interact with the ML model via an online form or an API call.
+- Cloud deployment to AWS EC2 using a public docker image. However, due to limitations of the free-tier in AWS, an alternative deployment was made to `onrender` free-tier account. 
+- [Deployed Capstone Website @ https://ai300-capstone-project.onrender.com/](https://ai300-capstone-project.onrender.com/) *Website takes some time to load due to resource allocation and start up required for free-tier.*
 - API address resource: `https://ai300-capstone-project.onrender.com/api/predict` 
   - Parameters documentation can be found [here](https://ai300-capstone-project.onrender.com/doc#apicall)
 
